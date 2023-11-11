@@ -19,7 +19,7 @@ services:
       - LANGUAGE=en_US:en
       - JAVA_HOME=/usr/lib/jvm/jdk-17.0.8-bellsoft-x86_64
       - ALLOW_GOOGLE_VISIBILITY=false
-      - APP_LOCALE=ro-RO
+      - APP_LOCALE=ro_RO
       - UI_APPNAME=pdf-tools.clockworks.ro
     command: ["java", "-jar", "/app.jar"]
     entrypoint: ["/scripts/init.sh"]
