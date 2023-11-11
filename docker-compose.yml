@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  stirling-pdf:
+    image: frooodle/s-pdf
+    container_name: pdf-tools-clockworks-ro
+    network_mode: bridge
+    ports:
+      - "7890:8080"
+    hostname: pdf-tools
+    restart: always
+    volumes:
+      - trainingData:/usr/share/tesseract-ocr/4.00/tessdata:rw #Required for extra OCR languages
+      - extraConfigs:/configs:rw
+      - customFiles:/customFiles:rw
+    environment:
+      - PATH=/usr/lib/jvm/jdk-17.0.8-bellsoft-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US:en
+      - JAVA_HOME=/usr/lib/jvm/jdk-17.0.8-bellsoft-x86_64
+      - APP_HOME_NAME=pdf-tools.clockworks.ro
+      - ALLOW_GOOGLE_VISIBILITY=false
+      - APP_LOCALE=en_US
+      - UI_APPNAME=pdf-tools.clock.ro
+    command: ["java", "-jar", "/app.jar"]
+    entrypoint: ["/scripts/init.sh"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f https://pdf-tools.clockworks.ro || exit 1"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  trainingData:
+  extraConfigs:
+  customFiles:
