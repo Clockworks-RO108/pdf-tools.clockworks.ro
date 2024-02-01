@@ -3,10 +3,10 @@ version: '3.9'
 services:
   stirling-pdf:
     image: frooodle/s-pdf
-    container_name: pdf-tools-clockworks-ro
+    container_name: clockworks-pdf-tools
     network_mode: bridge
     ports:
-      - "7890:8080"
+      - "7891:8080"
     hostname: pdf-tools
     restart: always
     volumes:
@@ -18,7 +18,7 @@ services:
       - LANG=en_US.UTF-8
       - LANGUAGE=en_US:en
       - JAVA_HOME=/usr/lib/jvm/jdk-17.0.8-bellsoft-x86_64
-      - ALLOW_GOOGLE_VISIBILITY=false
+      - ALLOW_GOOGLE_VISIBILITY=true
       - APP_LOCALE=ro_RO
       - UI_APPNAME=pdf-tools.clockworks.ro
     command: ["java", "-jar", "/app.jar"]
