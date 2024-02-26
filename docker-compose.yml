@@ -3,16 +3,16 @@ version: '3.9'
 services:
   stirling-pdf:
     image: frooodle/s-pdf
-    container_name: clockworks-pdf-tools
+    #container_name: clockworks-pdf-tools
     network_mode: bridge
     ports:
       - "7891:8080"
-    hostname: pdf-tools
+    #hostname: pdf-tools
     restart: always
     volumes:
-      - trainingData:/usr/share/tesseract-ocr/4.00/tessdata:rw #Required for extra OCR languages
-      - extraConfigs:/configs:rw
-      - customFiles:/customFiles:rw
+      - clockworks-pdftools-trainingData:/usr/share/tesseract-ocr/4.00/tessdata:rw #Required for extra OCR languages
+      - clockworks-pdftools-extraConfigs:/configs:rw
+      - clockworks-pdftools-customFiles:/customFiles:rw
     environment:
       - PATH=/usr/lib/jvm/jdk-17.0.8-bellsoft-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - LANG=en_US.UTF-8
@@ -31,6 +31,6 @@ services:
       start_period: 30s
 
 volumes:
-  trainingData:
-  extraConfigs:
-  customFiles:
+  clockworks-pdftools-trainingData:
+  clockworks-pdftools-extraConfigs:
+  clockworks-pdftools-customFiles:
